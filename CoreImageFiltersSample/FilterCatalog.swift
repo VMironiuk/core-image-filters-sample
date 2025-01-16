@@ -6,6 +6,20 @@
 //
 
 struct FilterCatalog {
+  func filters(by categoryID: Int?) -> [Category.Filter]? {
+    guard let categoryID,
+          categoryID >= 0,
+          categoryID < categories.count else { return nil }
+    return categories[categoryID].filters
+  }
+  
+  func filter(byCategoryID categoryID: Int?, filterID: Int?) -> Category.Filter? {
+    guard let filters = filters(by: categoryID),
+          let filterID,
+          filterID >= 0,
+          filterID < filters.count else { return nil }
+    return filters[filterID]
+  }
 }
 
 extension FilterCatalog {
