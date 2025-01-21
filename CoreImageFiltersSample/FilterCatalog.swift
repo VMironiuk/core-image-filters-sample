@@ -5,15 +5,17 @@
 //  Created by Vova Myroniuk on 15.01.2025.
 //
 
-struct FilterCatalog {
-  func filters(by categoryID: Int?) -> [Category.Filter]? {
+public struct FilterCatalog {
+  public init() {}
+  
+  public func filters(by categoryID: Int?) -> [Category.Filter]? {
     guard let categoryID,
           categoryID >= 0,
           categoryID < categories.count else { return nil }
     return categories[categoryID].filters
   }
   
-  func filter(byCategoryID categoryID: Int?, filterID: Int?) -> Category.Filter? {
+  public func filter(byCategoryID categoryID: Int?, filterID: Int?) -> Category.Filter? {
     guard let filters = filters(by: categoryID),
           let filterID,
           filterID >= 0,
@@ -23,22 +25,22 @@ struct FilterCatalog {
 }
 
 extension FilterCatalog {
-  struct Category: Identifiable {
-    let id: Int
-    let name: String
-    let filters: [Filter]
+  public struct Category: Identifiable {
+    public let id: Int
+    public let name: String
+    public let filters: [Filter]
   }
 }
 
 extension FilterCatalog.Category {
-  struct Filter: Identifiable {
-    let id: Int
-    let name: String
+  public struct Filter: Identifiable {
+    public let id: Int
+    public let name: String
   }
 }
 
 extension FilterCatalog {
-  var categories: [Category] {
+  public var categories: [Category] {
     [
       Category(
         id: 0,
