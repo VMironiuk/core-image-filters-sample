@@ -46,7 +46,11 @@ private extension ContentView {
       byCategoryID: filterCategoryID,
       filterID: filterID
     ) {
-      Text("Selected filter: \(filter.name)")
+      if filter.name == "Bokeh Blur" {
+        BokehBlurFilterView()
+      } else {
+        Text("Selected filter: \(filter.name)")
+      }
     } else {
       Text("Select filter")
     }
