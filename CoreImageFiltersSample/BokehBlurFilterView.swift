@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct BokehBlurFilterView: View {
-  @State private var radius: Float = 20
-  private let model = BokehBlurFilterModel()
+  @StateObject private var model = BokehBlurFilterModel()
   var body: some View {
     HStack {
       Spacer()
@@ -33,13 +32,33 @@ struct BokehBlurFilterView: View {
   private var sidebar: some View {
     VStack {
       Slider(
-        value: $radius,
-        in: 0...50,
-        step: 1,
+        value: $model.radius,
+        in: model.minRadius...model.maxRadius,
+        step: model.radiusStep,
         label: { Text("Radius") },
-        minimumValueLabel: { Text("0") },
-        maximumValueLabel: { Text("50") },
-        onEditingChanged: { _ in print(#function) })
+        minimumValueLabel: { Text("\(Int(model.minRadius))") },
+        maximumValueLabel: { Text("\(Int(model.maxRadius))") })
+      Slider(
+        value: $model.ringSize,
+        in: model.minRingSize...model.maxRingSize,
+        step: model.ringSizeStep,
+        label: { Text("Ring Size") },
+        minimumValueLabel: { Text("\(Int(model.minRingSize))") },
+        maximumValueLabel: { Text("\(Int(model.maxRingSize))") })
+      Slider(
+        value: $model.ringAmount,
+        in: model.minRingAmount...model.maxRingAmount,
+        step: model.ringAmountStep,
+        label: { Text("Ring Amount") },
+        minimumValueLabel: { Text("\(Int(model.minRingAmount))") },
+        maximumValueLabel: { Text("\(Int(model.maxRingAmount))") })
+      Slider(
+        value: $model.softness,
+        in: model.minSoftness...model.maxSoftness,
+        step: model.softnessStep,
+        label: { Text("Softness") },
+        minimumValueLabel: { Text("\(Int(model.minSoftness))") },
+        maximumValueLabel: { Text("\(Int(model.maxSoftness))") })
     }
     .frame(width: 200)
     .padding()
