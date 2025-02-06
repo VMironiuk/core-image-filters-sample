@@ -7,17 +7,23 @@
 
 import SwiftUI
 
-struct StepperInput: View {
-  @Binding var value: Float
+struct StepperInput<V>: View where V: Strideable {
+  @Binding var value: V
   private let title: String
-  private let bounds: ClosedRange<Float>
-  private let step: Float.Stride
+  private let bounds: ClosedRange<V>
+  private let step: V.Stride
+  
+  private let numberFormatter: NumberFormatter = {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    return formatter
+  }()
   
   init(
     _ title: String,
-    value: Binding<Float>,
-    in bounds: ClosedRange<Float>,
-    step: Float.Stride
+    value: Binding<V>,
+    in bounds: ClosedRange<V>,
+    step: V.Stride
   ) {
     self.title = title
     self._value = value
@@ -34,7 +40,7 @@ struct StepperInput: View {
         in: bounds,
         step: step,
         label: {
-          TextField(value: $value, format: .number, label: {})
+          TextField(value: $value, formatter: numberFormatter, label: {})
             .onChange(of: value) { oldValue, newValue in
               if newValue < bounds.lowerBound || newValue > bounds.upperBound {
                 value = oldValue
