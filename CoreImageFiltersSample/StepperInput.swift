@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StepperInput<V>: View where V: Strideable {
-  @Binding var value: V
+  @Binding private var value: V
   private let title: String
   private let bounds: ClosedRange<V>
   private let step: V.Stride
