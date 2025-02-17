@@ -34,25 +34,25 @@ struct BokehBlurFilterView: View {
       StepperInput(
         "Radius",
         value: $model.radius,
-        in: model.minRadius...model.maxRadius,
+        in: model.radiusBounds,
         step: model.radiusStep
       )
       StepperInput(
         "Ring Size",
         value: $model.ringSize,
-        in: model.minRingSize...model.maxRingSize,
+        in: model.ringSizeBounds,
         step: model.ringSizeStep
       )
       StepperInput(
         "Ring Amount",
         value: $model.ringAmount,
-        in: model.minRingAmount...model.maxRingAmount,
+        in: model.ringAmountBounds,
         step: model.ringAmountStep
       )
       StepperInput(
         "Softness",
         value: $model.softness,
-        in: model.minSoftness...model.maxSoftness,
+        in: model.softnessBounds,
         step: model.softnessStep
       )
       Spacer()
