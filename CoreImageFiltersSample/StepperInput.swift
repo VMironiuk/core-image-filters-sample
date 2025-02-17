@@ -43,7 +43,7 @@ struct StepperInput<V>: View where V: Strideable {
           TextField(value: $value, formatter: numberFormatter, label: {})
         }
       )
-      .frame(minWidth: 75, maxWidth: 150)
+      .frame(minWidth: 75, maxWidth: 100)
       .onChange(of: value) { oldValue, newValue in
         if newValue < bounds.lowerBound || newValue > bounds.upperBound {
           value = oldValue

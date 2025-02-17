@@ -31,37 +31,34 @@ struct BokehBlurFilterView: View {
   
   private var sidebar: some View {
     VStack {
-      Slider(
+      StepperInput(
+        "Radius",
         value: $model.radius,
         in: model.minRadius...model.maxRadius,
-        step: model.radiusStep,
-        label: { Text("Radius") },
-        minimumValueLabel: { Text("\(Int(model.minRadius))") },
-        maximumValueLabel: { Text("\(Int(model.maxRadius))") })
-      Slider(
+        step: model.radiusStep
+      )
+      StepperInput(
+        "Ring Size",
         value: $model.ringSize,
         in: model.minRingSize...model.maxRingSize,
-        step: model.ringSizeStep,
-        label: { Text("Ring Size") },
-        minimumValueLabel: { Text("\(Int(model.minRingSize))") },
-        maximumValueLabel: { Text("\(Int(model.maxRingSize))") })
-      Slider(
+        step: model.ringSizeStep
+      )
+      StepperInput(
+        "Ring Amount",
         value: $model.ringAmount,
         in: model.minRingAmount...model.maxRingAmount,
-        step: model.ringAmountStep,
-        label: { Text("Ring Amount") },
-        minimumValueLabel: { Text("\(Int(model.minRingAmount))") },
-        maximumValueLabel: { Text("\(Int(model.maxRingAmount))") })
-      Slider(
+        step: model.ringAmountStep
+      )
+      StepperInput(
+        "Softness",
         value: $model.softness,
         in: model.minSoftness...model.maxSoftness,
-        step: model.softnessStep,
-        label: { Text("Softness") },
-        minimumValueLabel: { Text("\(Int(model.minSoftness))") },
-        maximumValueLabel: { Text("\(Int(model.maxSoftness))") })
+        step: model.softnessStep
+      )
+      Spacer()
     }
     .frame(width: 200)
-    .padding()
+    .padding(8)
   }
 }
 
