@@ -10,10 +10,8 @@ import SwiftUI
 struct BokehBlurFilterView: View {
   @StateObject private var model = BokehBlurFilterModel()
   var body: some View {
-    HStack {
-      Spacer()
+    HSplitView {
       viewport
-      Spacer()
       sidebar
     }
   }
@@ -23,7 +21,8 @@ struct BokehBlurFilterView: View {
     if let cgImage = model.outputImage {
       Image(cgImage, scale: 1.0, label: Text(""))
         .resizable()
-        .frame(width: 300, height: 300)
+        .scaledToFit()
+        .padding()
     } else {
       Text("Cannot load or process image")
     }
@@ -57,7 +56,7 @@ struct BokehBlurFilterView: View {
       )
       Spacer()
     }
-    .frame(width: 200)
+    .frame(minWidth: 200, maxWidth: 350)
     .padding(8)
   }
 }
