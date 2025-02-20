@@ -31,7 +31,7 @@ final class BokehBlurFilterModel: ObservableObject {
     bokehBlurFilter.ringAmount = ringAmount
     bokehBlurFilter.softness = softness
     bokehBlurFilter.radius = radius
-    return createCGImage(from: bokehBlurFilter.outputImage)
+    return CGImage.create(from: bokehBlurFilter.outputImage)
   }
   
   init() {
@@ -41,10 +41,4 @@ final class BokehBlurFilterModel: ObservableObject {
     }
     inputImage = image
   }
-}
-
-private func createCGImage(from ciImage: CIImage?) -> CGImage? {
-  if let cgImage = ciImage?.cgImage { return cgImage }
-  guard let ciImage else { return nil }
-  return CIContext().createCGImage(ciImage, from: ciImage.extent)
 }
