@@ -8,27 +8,9 @@
 import SwiftUI
 
 struct BokehBlurFilterView: View {
-  @StateObject private var model = BokehBlurFilterModel()
+  @StateObject var model: BokehBlurFilterModel
+  
   var body: some View {
-    HSplitView {
-      viewport
-      sidebar
-    }
-  }
-  
-  @ViewBuilder
-  private var viewport: some View {
-    if let cgImage = model.outputImage {
-      Image(cgImage, scale: 1.0, label: Text(""))
-        .resizable()
-        .scaledToFit()
-        .padding()
-    } else {
-      Text("Cannot load or process image")
-    }
-  }
-  
-  private var sidebar: some View {
     VStack {
       StepperInput(
         "Radius",
@@ -56,11 +38,15 @@ struct BokehBlurFilterView: View {
       )
       Spacer()
     }
-    .frame(minWidth: 200, maxWidth: 350)
+    .frame(minWidth: 200, maxWidth: 275)
     .padding(8)
   }
 }
 
 #Preview {
-  BokehBlurFilterView()
+  BokehBlurFilterView(
+    model: BokehBlurFilterModel(
+      imageStore: ImageStore()
+    )
+  )
 }
