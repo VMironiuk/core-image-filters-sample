@@ -1,5 +1,5 @@
 //
-//  BokehBlurFilterModel.swift
+//  BokehBlurFilterViewModel.swift
 //  CoreImageFiltersSample
 //
 //  Created by Vova Myroniuk on 21.01.2025.
@@ -8,7 +8,7 @@
 import Combine
 import CoreImage.CIFilterBuiltins
 
-final class BokehBlurFilterModel: ObservableObject {
+final class BokehBlurFilterViewModel: ObservableObject {
   private let inputImage: CIImage?
   
   private var subscription: AnyCancellable?

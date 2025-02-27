@@ -9,11 +9,11 @@ import SwiftUI
 
 struct BokehBlurFilterView: View {
   @EnvironmentObject private var imageStore: ImageStore
-  @StateObject private var model: BokehBlurFilterModel
+  @StateObject private var model: BokehBlurFilterViewModel
   
   init(image: CGImage?) {
     _model = StateObject(
-      wrappedValue: BokehBlurFilterModel(
+      wrappedValue: BokehBlurFilterViewModel(
         inputImage: image
       )
     )
