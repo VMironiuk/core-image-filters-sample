@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ImageView: View {
-  @ObservedObject var imageStore: ImageStore
+  @EnvironmentObject private var imageStore: ImageStore
   
   var body: some View {
     if let image = imageStore.image {
@@ -34,5 +34,5 @@ struct ImageView: View {
 }
 
 #Preview {
-  ImageView(imageStore: ImageStore())
+  ImageView()
 }

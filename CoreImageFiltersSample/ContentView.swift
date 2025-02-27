@@ -20,6 +20,7 @@ struct ContentView: View {
       content: content,
       detail: detail
     )
+    .environmentObject(imageStore)
   }
 }
 
@@ -49,7 +50,7 @@ private extension ContentView {
     ) {
       if filter.name == "Bokeh Blur" {
         HSplitView {
-          ImageView(imageStore: imageStore)
+          ImageView()
           BokehBlurFilterView(
             model: BokehBlurFilterModel(
               imageStore: imageStore
