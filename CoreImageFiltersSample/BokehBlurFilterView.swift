@@ -8,7 +8,16 @@
 import SwiftUI
 
 struct BokehBlurFilterView: View {
-  @StateObject var model: BokehBlurFilterModel
+  @EnvironmentObject private var imageStore: ImageStore
+  @StateObject private var model: BokehBlurFilterModel
+  
+  init(image: CGImage?) {
+    _model = StateObject(
+      wrappedValue: BokehBlurFilterModel(
+        inputImage: image
+      )
+    )
+  }
   
   var body: some View {
     VStack {
@@ -40,13 +49,12 @@ struct BokehBlurFilterView: View {
     }
     .frame(minWidth: 200, maxWidth: 275)
     .padding(8)
+    .onChange(of: model.outputImage) { _, newImage in
+      imageStore.image = newImage
+    }
   }
 }
 
 #Preview {
-  BokehBlurFilterView(
-    model: BokehBlurFilterModel(
-      imageStore: ImageStore()
-    )
-  )
+  BokehBlurFilterView(image: nil)
 }

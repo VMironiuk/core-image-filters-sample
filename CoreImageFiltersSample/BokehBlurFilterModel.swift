@@ -8,10 +8,8 @@
 import Combine
 import CoreImage.CIFilterBuiltins
 
-@MainActor
 final class BokehBlurFilterModel: ObservableObject {
-  private let imageStore: ImageStore
-  private var inputImage: CIImage?
+  private let inputImage: CIImage?
   
   private var subscription: AnyCancellable?
 
@@ -28,11 +26,13 @@ final class BokehBlurFilterModel: ObservableObject {
   @Published var ringSize: Float = 0.0
   @Published var ringAmount: Float = 0.0
   @Published var softness: Float = 0.0
+  @Published private(set) var outputImage: CGImage?
   
-  init(imageStore: ImageStore) {
-    self.imageStore = imageStore
-    if let image = imageStore.image {
-      inputImage = CIImage(cgImage: image)
+  init(inputImage: CGImage?) {
+    if let inputImage {
+      self.inputImage = CIImage(cgImage: inputImage)
+    } else {
+      self.inputImage = nil
     }
     
     subscription = $radius
@@ -49,11 +49,6 @@ final class BokehBlurFilterModel: ObservableObject {
     bokehBlurFilter.ringAmount = ringAmount
     bokehBlurFilter.softness = softness
     bokehBlurFilter.radius = radius
-    
-    Task {
-      await MainActor.run {
-        imageStore.image = CGImage.create(from: bokehBlurFilter.outputImage)
-      }
-    }
+    outputImage = CGImage.create(from: bokehBlurFilter.outputImage)
   }
 }

@@ -51,11 +51,7 @@ private extension ContentView {
       if filter.name == "Bokeh Blur" {
         HSplitView {
           ImageView()
-          BokehBlurFilterView(
-            model: BokehBlurFilterModel(
-              imageStore: imageStore
-            )
-          )
+          BokehBlurFilterView(image: imageStore.image)
         }
       } else {
         Text("Selected filter: \(filter.name)")
