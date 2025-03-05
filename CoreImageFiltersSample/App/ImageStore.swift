@@ -10,6 +10,7 @@ import CoreImage
 import Foundation
 
 final class ImageStore: ObservableObject {
+  private let originalImage: CGImage?
   @Published var image: CGImage?
   
   init() {
@@ -17,6 +18,12 @@ final class ImageStore: ObservableObject {
           let image = CIImage(contentsOf: url) else {
       fatalError("Cannot load 'default-input-image'")
     }
-    self.image = CGImage.create(from: image)
+    let cgImage = CGImage.create(from: image)
+    self.image = cgImage
+    self.originalImage = cgImage
+  }
+  
+  func reset() {
+    image = originalImage
   }
 }

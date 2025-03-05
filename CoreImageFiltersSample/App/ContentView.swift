@@ -60,6 +60,7 @@ private extension ContentView {
       }
       Spacer()
       Button {
+        imageStore.reset()
       } label: {
         Text("Reset Image")
           .frame(maxWidth: .infinity)
