@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
   @StateObject private var imageStore = ImageStore()
   @State private var filterCategoryID: Int?
-  @State private var filterID: Int?
+  @State private var filterID: String?
   
   let filterCatalog: FilterCatalog
   
@@ -48,14 +48,10 @@ private extension ContentView {
       byCategoryID: filterCategoryID,
       filterID: filterID
     ) {
-      if filter.name == "Bokeh Blur" {
         HSplitView {
           ImageView()
-          BokehBlurFilterView(image: imageStore.image)
+          FilterViewFactory.filterView(by: filter, image: imageStore.image)
         }
-      } else {
-        Text("Selected filter: \(filter.name)")
-      }
     } else {
       Text("Select filter")
     }

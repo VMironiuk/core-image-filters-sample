@@ -15,12 +15,10 @@ public struct FilterCatalog {
     return categories[categoryID].filters
   }
   
-  public func filter(byCategoryID categoryID: Int?, filterID: Int?) -> Category.Filter? {
+  public func filter(byCategoryID categoryID: Int?, filterID: String?) -> Category.Filter? {
     guard let filters = filters(by: categoryID),
-          let filterID,
-          filterID >= 0,
-          filterID < filters.count else { return nil }
-    return filters[filterID]
+          let filterID else { return nil }
+    return filters.first { $0.rawValue == filterID }
   }
 }
 
@@ -33,9 +31,42 @@ extension FilterCatalog {
 }
 
 extension FilterCatalog.Category {
-  public struct Filter: Identifiable {
-    public let id: Int
-    public let name: String
+  public enum Filter: String, Identifiable {
+    public var id: String { rawValue }
+    public var name: String { rawValue }
+    
+    case bokehBlur = "Bokeh Blur"
+    case boxBlur = "Box Blur"
+    case discBlur = "Disc Blur"
+    case gaussianBlur = "Gaussian Blur"
+    case maskedVariableBlur = "Masked Variable Blur"
+    case median = "Median"
+    case morphologyGradient = "Morphology Gradient"
+    case morphologyMaximum = "Morphology Maximum"
+    case morphologyMinimum = "Morphology Minimum"
+    case morphologyRectangleMaximum = "Morphology Rectangle Maximum"
+    case morphologyRectangleMinimum = "Morphology Rectangle Minimum"
+    case motionBlur = "Motion Blur"
+    case noiseReduction = "Noise Reduction"
+    case zoomBlur = "Zoom Blur"
+    case colorAbsoluteDifference = "Color Absolute Difference"
+    case colorClamp = "Color Clamp"
+    case colorControls = "Color Controls"
+    case colorMatrix = "Color Matrix"
+    case colorPolynomial = "Color Polynomial"
+    case colorThreshold = "Color Threshold"
+    case colorThresholdOtsu = "Color Threshold Otsu"
+    case depthToDisparity = "Depth To Disparity"
+    case disparityToDepth = "Disparity To Depth"
+    case exposureAdjust = "Exposure Adjust"
+    case gammaAdjust = "Gamma Adjust"
+    case hueAdjust = "Hue Adjust"
+    case linearToSRGBToneCurve = "Linear To SRGB Tone Curve"
+    case srgbToneCurveToLinear = "SRGB Tone Curve To Linear"
+    case temperatureAndTint = "Temperature And Tint"
+    case toneCurve = "Tone Curve"
+    case vibrance = "Vibrance"
+    case whitePointAdjust = "White Point Adjust"
   }
 }
 
@@ -46,44 +77,44 @@ extension FilterCatalog {
         id: 0,
         name: "Blur Filters",
         filters: [
-          .init(id: 0, name: "Bokeh Blur"),
-          .init(id: 1, name: "Box Blur"),
-          .init(id: 2, name: "Disc Blur"),
-          .init(id: 3, name: "Gaussian Blur"),
-          .init(id: 4, name: "Masked Variable Blur"),
-          .init(id: 5, name: "Median"),
-          .init(id: 6, name: "Morphology Gradient"),
-          .init(id: 7, name: "Morphology Maximum"),
-          .init(id: 8, name: "Morphology Minimum"),
-          .init(id: 9, name: "Morphology Rectangle Maximum"),
-          .init(id: 10, name: "Morphology Rectangle Minimum"),
-          .init(id: 11, name: "Motion Blur"),
-          .init(id: 12, name: "Noise Reduction"),
-          .init(id: 13, name: "Zoom Blur")
+          .bokehBlur,
+          .boxBlur,
+          .discBlur,
+          .gaussianBlur,
+          .maskedVariableBlur,
+          .median,
+          .morphologyGradient,
+          .morphologyMaximum,
+          .morphologyMinimum,
+          .morphologyRectangleMaximum,
+          .morphologyRectangleMinimum,
+          .motionBlur,
+          .noiseReduction,
+          .zoomBlur
         ]
       ),
       Category(
         id: 1,
         name: "Color Adjustment Filters",
         filters: [
-          .init(id: 0, name: "Color Absolute Difference"),
-          .init(id: 1, name: "Color Clamp"),
-          .init(id: 2, name: "Color Controls"),
-          .init(id: 3, name: "Color Matrix"),
-          .init(id: 4, name: "Color Polynomial"),
-          .init(id: 5, name: "Color Threshold"),
-          .init(id: 6, name: "Color Threshold Otsu"),
-          .init(id: 7, name: "Depth To Disparity"),
-          .init(id: 8, name: "Disparity To Depth"),
-          .init(id: 9, name: "Exposure Adjust"),
-          .init(id: 10, name: "Gamma Adjust"),
-          .init(id: 11, name: "Hue Adjust"),
-          .init(id: 12, name: "Linear To SRGB Tone Curve"),
-          .init(id: 13, name: "SRGB Tone Curve To Linear"),
-          .init(id: 14, name: "Temperature And Tint"),
-          .init(id: 15, name: "Tone Curve"),
-          .init(id: 16, name: "Vibrance"),
-          .init(id: 17, name: "White Point Adjust")
+          .colorAbsoluteDifference,
+          .colorClamp,
+          .colorControls,
+          .colorMatrix,
+          .colorPolynomial,
+          .colorThreshold,
+          .colorThresholdOtsu,
+          .depthToDisparity,
+          .disparityToDepth,
+          .exposureAdjust,
+          .gammaAdjust,
+          .hueAdjust,
+          .linearToSRGBToneCurve,
+          .srgbToneCurveToLinear,
+          .temperatureAndTint,
+          .toneCurve,
+          .vibrance,
+          .whitePointAdjust
         ]
       )
     ]
