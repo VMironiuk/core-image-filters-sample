@@ -47,8 +47,6 @@ struct BokehBlurFilterView: View {
       )
       Spacer()
     }
-    .frame(minWidth: 200, maxWidth: 275)
-    .padding(8)
     .onChange(of: model.outputImage) { _, newImage in
       imageStore.image = newImage
     }

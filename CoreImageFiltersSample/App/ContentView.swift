@@ -44,17 +44,29 @@ private extension ContentView {
   
   @ViewBuilder
   private func detail() -> some View {
-    if let filter = filterCatalog.filter(
-      byCategoryID: filterCategoryID,
-      filterID: filterID
-    ) {
-        HSplitView {
-          ImageView()
-          FilterViewFactory.filterView(by: filter, image: imageStore.image)
-        }
-    } else {
-      Text("Select filter")
+    HSplitView {
+      ImageView()
+      attributesInspector
     }
+  }
+  
+  private var attributesInspector: some View {
+    VStack {
+      if let filter = filterCatalog.filter(
+        byCategoryID: filterCategoryID,
+        filterID: filterID
+      ) {
+        FilterViewFactory.filterView(by: filter, image: imageStore.image)
+      }
+      Spacer()
+      Button {
+      } label: {
+        Text("Reset Image")
+          .frame(maxWidth: .infinity)
+      }
+    }
+    .frame(minWidth: 200, maxWidth: 275)
+    .padding()
   }
 }
 
