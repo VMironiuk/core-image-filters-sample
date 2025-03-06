@@ -11,7 +11,7 @@ import SwiftUI
 struct CoreImageFiltersSampleApp: App {
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      ContentView(filterCatalog: FilterCatalog())
     }
   }
 }
